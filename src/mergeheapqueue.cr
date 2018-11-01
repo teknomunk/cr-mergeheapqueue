@@ -13,12 +13,14 @@ class MergeHeapQueue(T)
 	@side_b : MergeHeapQueue(T)?
 	@total_size_b = 0
 
-	def push( value : T )
-		if @input.full?
-			spill()
-		end
+	def count()
+		@total_size_a + @total_size_b + @input.size + @output_a.size + @output_b.size
+	end
 
+	def push( value : T )
 		@input.push(value)
+
+		spill() if @input.full?
 	end
 	def next()
 		next_impl {|i| nil }
@@ -42,24 +44,22 @@ class MergeHeapQueue(T)
 	def spill()
 		if (side_a=@side_a).nil?
 			side_a = MergeHeapQueue(T).new
-			@total_size_a += @input.size
+			@total_size_a += (@input.size - 15)
 			side_a.do_spill(pointerof(@input))
 		elsif (side_b=@side_b).nil?
 			side_b = MergeHeapQueue(T).new
-			@total_size_b += @input.size
+			@total_size_b += (@input.size - 15)
 			side_b.do_spill(pointerof(@input))
 		elsif @total_size_a < @total_size_b
-			side_a = MergeHeapQueue(T).new
-			@total_size_a += @input.size
+			@total_size_a += (@input.size - 15)
 			side_a.do_spill(pointerof(@input))
 		else
-			side_b = MergeHeapQueue(T).new
-			@total_size_b += @input.size
+			@total_size_b += (@input.size - 15)
 			side_b.do_spill(pointerof(@input))
 		end
 	end
 	def do_spill( src : Pointer(StaticArrayHeap(T,30)) )
-		while !src.value.empty?
+		while src.value.size > 15
 			v = src.value.next
 			src.value.pop
 			@input.push(v)

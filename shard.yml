@@ -9,5 +9,7 @@ crystal: 0.26.1
 dependencies:
   staticarrayheap:
     github: teknomunk/cr-staticarrayheap
+  galois-lfsr:
+    github: teknomunk/cr-galois-lfsr
 
 license: MIT
