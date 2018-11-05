@@ -9,7 +9,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   mergeheapqueue:
-    github: teknomunk/mergeheapqueue
+    github: teknomunk/cr-mergeheapqueue
 ```
 
 ## Usage
