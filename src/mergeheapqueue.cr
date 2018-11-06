@@ -71,9 +71,11 @@ class MergeHeapQueue(T)
 	private def refill( heap, child )
 		return if child.nil?
 
-		for i in 0...30 do
+		30.times do
 			return if child.empty?
-			heap.value.push(child.pop())
+			item = child.pop()
+			return if item.nil?
+			heap.value.push(item)
 		end
 	end
 	private def next_impl()
