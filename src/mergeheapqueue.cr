@@ -31,10 +31,10 @@ class MergeHeapQueue(T)
 				when 1; @input.pop
 				when 2
 					@output_a.pop
-					refill(pointerof(@output_a),@size_a) if @output_a.empty?
+					refill(pointerof(@output_a),@side_a) if @output_a.empty?
 				when 3
 					@output_b.pop
-					refill(pointerof(@output_b),@size_b) if @output_b.empty?
+					refill(pointerof(@output_b),@side_b) if @output_b.empty?
 			end
 		end					
 	end
