@@ -39,7 +39,7 @@ class MergeHeapQueue(T)
 		end					
 	end
 	def empty?()
-		return true
+		count == 0
 	end
 	def spill()
 		if (side_a=@side_a).nil?

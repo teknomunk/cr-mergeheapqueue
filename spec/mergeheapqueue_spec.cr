@@ -9,10 +9,12 @@ describe MergeHeapQueue do
 		end
 		it "adds many items to the queue" do
 			heap = MergeHeapQueue(Int32).new
+			heap.empty?.should be_true
 			l = LFSR::Galois.new( LFSR::MAX_24 )
 			500.times {|i| heap.push( l.next.to_i32 ) }
 
 			heap.count.should eq(500)
+			heap.empty?.should be_false
 		end
 	end
 end
